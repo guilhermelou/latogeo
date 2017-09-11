@@ -1,0 +1,136 @@
+<h4> Novo Empréstimo</h4>
+<div class="row">
+    <div class="col s6">
+        <ul class="collapsible" data-collapsible="accordion">
+            <li *ngFor="let kind of kinds">
+                <div class="collapsible-header">
+                    {{kind.name}}
+                </div>
+                <div class="collapsible-body">
+                    <ul class="items collection">
+                    <li *ngFor="let spec of kind.spec_kind"
+                        (click)="onSelectSpec(kind, spec)"
+                        class="collection-item">
+                        <span class="badge">{{spec.items_available.length}}/{{spec.items_total}}</span>
+                        <span>{{spec.name}}</span>
+                    </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col s6">
+    <div class="z-depth-1 grey lighten-4 row"
+        style=" padding: 32px 48px 15px 48px; border: 1px solid #EEE;">
+        <div>
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <h6>Itens Selecionados</h6>
+                </li>
+                <a [routerLink] *ngFor="let item of loan.itemsSelected"
+                    (click)="onRemoveItem(item)"
+                    class="collection-item">
+                    <span class="badge">Patrimônio: {{item.patrimony}}</span>
+                    <span>{{item.kind.name}}/{{item.spec.name}}</span>
+                </a>
+            </ul>
+        </div>
+        <div class="input-field col s12">
+          <input #searchStudent type="text" id="search-student"
+          [(ngModel)]="studentStr" class="autocomplete"
+          (keyup)="searchStudents(searchStudent.value)">
+          <label for="search-student">Participantes</label>
+          <ul class="autocomplete-content dropdown-content">
+              <li *ngFor="let user of students | async"
+              (click)="addStudent(user)">
+                  <a>{{user.email}}</a>
+              </li>
+          </ul>
+        </div>
+        <div>
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <h6>Participantes Selecionados</h6>
+                </li>
+                <a [routerLink] *ngFor="let user of loan.studentsSelected"
+                    (click)="removeStudent(user)"
+                    class="collection-item">
+                    {{user.email}}
+                </a>
+            </ul>
+        </div>
+        <div class="input-field col s12">
+            <select [(ngModel)]="loan.professorSelected"
+                materialize="material_select">
+                <option value=""
+                disabled selected>Professor(a) solicitante</option>
+                <option *ngFor="let prof of professors" [ngValue]="prof"
+                >{{prof.email}}</option>
+            </select>
+            <label>Professor(a) solicitante</label>
+        </div>
+
+        <div class="input-field col s12">
+            <select materialize="material_select"
+                [(ngModel)]="loan.disciplineSelected">
+                <optgroup *ngIf="courses" label="Curso">
+                    <option disabled selected>Disciplina
+                    </option>
+                </optgroup>
+                <optgroup *ngFor="let course of courses"
+                    label="{{course.name}}">
+                    <option
+                    *ngFor="let discipline of course.course_discipline"
+                    [ngValue]="discipline"
+                    >{{discipline.name}}</option>
+                </optgroup>
+            </select>
+            <label>Curso/Disciplina</label>
+        </div>
+        <div class="input-field col s12">
+            <label for="removal-date">Data da retirada</label>
+            <input id="removal-date" name="removal-date"
+                    [(ngModel)]="loan.removalPlannedDate"
+                   materialize="pickadate"
+                   [materializeParams]="[{format: 'dd/mm/yyyy'}]"
+                   type="text" />
+        </div>
+        <div class="input-field col s12">
+            <label for="delivery-date">Data da devolução</label>
+            <input id="delivery-date" name="delivery-date"
+                    [(ngModel)]="loan.deliveryPlannedDate"
+                   materialize="pickadate"
+                   [materializeParams]="[{format: 'dd/mm/yyyy'}]"
+                   type="text" />
+        </div>
+        <div class=" col s12 switch">
+            <div class="switch">
+                <label>
+                  Interno
+                  <input type="checkbox" [(ngModel)]="loan.external">
+                  <span class="lever"></span>
+                  Externo
+                </label>
+            </div>
+        </div>
+        <div class="input-field col s12">
+            <button class="waves-effect waves-light btn modal-trigger"
+                data-target="modal2">Agendar</button>
+        </div>
+            <div id="modal2" class="modal" materialize="modal"
+                [materializeParams]="[{dismissible: True}]" >
+                <div class="modal-content">
+                    <h4>Termo de Compromisso</h4>
+                    <p>Declaro estar ciente de que devo utilizar acessórios para minha segurança, como colete e cones sinalizadores na realização de trabalho onde o tráfego de veículos é constante e que responderei por qualquer irregularidade ou dano que for causado aos equipamentos sob minha responsabilidade durante o período solicitado.</p>
+                    </div>
+                    <div class="modal-footer">
+                    <a  class="modal-action modal-close
+                        waves-effect waves-green btn-flat">Cancelar</a>
+                    <a  class="modal-action modal-close
+                        waves-effect waves-green btn"
+                        (click)="createLoan()">Aceitar</a>
+                    </div>
+            </div>
+    </div>
+    </div>
+</div>

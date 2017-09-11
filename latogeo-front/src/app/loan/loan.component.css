@@ -1,0 +1,8 @@
+.items li {
+  cursor: pointer;
+}
+.items li:hover {
+}
+.items li.selected:hover {
+}
+
