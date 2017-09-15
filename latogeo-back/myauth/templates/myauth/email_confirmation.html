@@ -1,0 +1,43 @@
+{% load i18n %}
+
+<!DOCTYPE HTML>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"></link>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="container">
+      <div class="row">
+
+        <div>
+          <h3>CONFIRMAÇÃO DA SUA CONTA!</h3>
+        </div>
+
+        <hr>
+
+        <div>
+          <p>Seja Bem-vindo(a) à Easy Rota!</p>
+
+          <p>A equipe da Easy Rota dá-lhe as boas vindas e agradece a sua preferência.</p>
+
+          <a href="http://www.easyrota.com.br{% url 'myauth:validate_email' user.id user.confirmation_key %}">CLIQUE AQUI PARA LIBERAR A SUA CONTA!</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/scripts/bootstrap/jquery.min.js"></script>
+  <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
+
+</body>
+</html>

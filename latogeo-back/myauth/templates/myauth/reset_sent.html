@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% block title %}
+{% trans "Password recovery sent" %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static "home/assets/styles/account.css"%}"></link>
+
+<div class="container">
+	<div id="page-content-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<div class="panel-login">
+						<div class="panel-heading">
+							<div class="row">
+
+								<div class="text-uppercase">
+									<a href="#" class="active" id="login-form-link">{% trans "Password recovery sent" %}</a>
+								</div>
+
+							</div>
+							<hr>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+
+									<p>
+										<h4>
+											<div class="instruction text-center">
+												<p>
+													{% blocktrans with ago=timestamp|timesince %}An email was sent to <strong>{{ email }}</strong> {{ ago }} ago. Use the link in it to set a new password.{% endblocktrans %}
+												</p>
+											</div>
+										</h4>
+									</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

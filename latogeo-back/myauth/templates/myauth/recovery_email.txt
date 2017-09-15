@@ -1,0 +1,55 @@
+{% load i18n %}
+
+<!DOCTYPE HTML>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"></link>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+
+  <link rel="stylesheet" href="assets/styles/home.css"></link>
+
+</head>
+<body>
+
+  <div class="container">
+    <div class="container">
+      <div class="row">
+
+        <div>
+          <h3>ESQUECEU A SENHA?</h3>
+        </div>
+
+        <hr>
+
+        <div>
+          <p>
+            {% blocktrans %}Dear {{ username }},{% endblocktrans %}
+          </p>
+          <p>
+            {% blocktrans with domain=site.domain %}You -- or someone pretending to be you -- has requested a password reset on {{ domain }}.{% endblocktrans %}
+          </p>
+          <p>
+            {% trans "You can set your new password by following this link:" %}
+          </p>
+          <p>
+            http{% if secure %}s{% endif %}://{{ site.domain }}{% url 'account:my_reset' token %}
+          </p>
+          <p>
+            {% trans "If you don't want to reset your password, simply ignore this email and it will stay unchanged." %}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/scripts/bootstrap/jquery.min.js"></script>
+  <script src="assets/scripts/bootstrap/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static from staticfiles %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static "home/assets/styles/account.css" %}?v=1"></link>
+
+<div class="container">
+  <div id="page-content-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="panel-login">
+            <div class="panel-heading">
+              <div class="row">
+                {% if is_login %}
+                    <div class="col-xs-6">
+                    <a href="#" class="active" id="login-form-link">ENTRAR</a>
+                    </div>
+                    <div class="col-xs-6">
+                    <a href="#" id="register-form-link">CADASTRAR-SE</a>
+                    </div>
+                    <script type="text/javascript">
+                    window.onload = function()
+                    {
+                        document.getElementById("login-form-link").click();
+                    };
+                    </script>
+                {% else %}
+                    <div class="col-xs-6">
+                    <a href="#" id="login-form-link">ENTRAR</a>
+                    </div>
+                    <div class="col-xs-6">
+                    <a href="#" class="active" id="register-form-link">CADASTRAR-SE</a>
+                    </div>
+                    <script type="text/javascript">
+                    window.onload = function()
+                    {
+                        document.getElementById("register-form-link").click();
+                    };
+                    </script>
+                {% endif %}
+              </div>
+              <hr>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <form id="login-form" action="." method="post" role="form" style="display: block;">
+                    {{ login_form.non_field_errors }}
+                    {% csrf_token %}
+                    <div class="form-group text-area">
+                      {{ login_form.username.errors }}
+                      <input type="text" name="username" id="id_username" tabindex="1" class="form-control" placeholder="{{login_form.username.label}}" value="">
+                    </div>
+                    <div class="form-group text-area">
+                      {{ login_form.password.errors }}
+                      <input type="password" name="password" id="id_password" tabindex="2" class="form-control" placeholder="{{login_form.password.label}}">
+                    </div>
+                    <div class="form-group text-center">
+                      <input type="checkbox" tabindex="3" class="" name="remember" id="remember" checked>
+                      <label for="remember">Lembre-me</label>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                          <input type="hidden" name="logging"  value="True">
+                          <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn default-button" value="Entrar">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="text-center">
+                            <a href="{% url "account:my_recover" %}" tabindex="5" class="forgot-password">Esqueceu a senha?</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <form id="register-form"  action="." method="post" role="form" style="display: none;">
+                    {{ creation_form.non_field_errors }}
+                    {% csrf_token %}
+                    <input type="hidden" name="creating"  value="True">
+
+                    <div class="form-group text-area">
+                      {{ creation_form.email.errors }}
+                      <input type="text" name="email" id="id_email" tabindex="2" class="form-control" placeholder="{{creation_form.email.label}}" value="" required="True">
+                    </div>
+
+                    <div class="form-group text-area">
+                      {{ creation_form.password1.errors }}
+                      <input type="password" name="password1" id="id_password1" tabindex="3" class="form-control" placeholder="{{creation_form.password1.label}}" value="" required="True">
+                    </div>
+
+                    <div class="form-group text-area">
+                      {{ creation_form.password2.errors }}
+                      <input type="password" name="password2" id="id_password2" tabindex="4" class="form-control" placeholder="{{creation_form.password2.label}}" value="" required="True">
+                    </div>
+
+                    <!-- Check box for the terms of use -->
+                    <div class="form-group text-center">
+                      {{ creation_form.terms.errors }}
+                      <input type="checkbox" tabindex="5" id="id_terms" name="terms" required="True">
+                      <label for="id_terms">
+                        <a style="color: #6e1e52" target="_blank" href="{% url 'terms_of_use' %}">Li Termos de Uso e Concordo.</a>
+                      </label>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                          <input type="submit" name="register-submit" id="register-submit" tabindex="5" class="form-control btn default-button" value="Registrar agora">
+                        </div>
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

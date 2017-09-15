@@ -41,6 +41,18 @@ export class LoanService {
                         return response.json() as Loan[]})
                .catch(this.handleError);
   }
+  cancel(id: number): Promise<Loan> {
+    let url = myGlobals.backUrl + 'api/loans/'+id+'/cancel/';
+    let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + this.myAuthService.token
+    });
+    return this.http
+        .patch(url, JSON.stringify({}), {headers: headers})
+        .toPromise()
+        .then(response => console.log(response.json) )
+        .catch(this.handleError);
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

@@ -1,3 +1,96 @@
-<p>
-  current-loans works!
-</p>
+<div class="row">
+    <div class="col s12">
+
+        <ul class="collapsible popout" data-collapsible="accordion">
+            <li *ngFor="let loan of currentLoans">
+                <div class="collapsible-header">
+                    {{loan.removal_planned_date | date: 'dd/MM/yyyy'}} <span class="badge">{{loan.status}}</span>
+                </div>
+                <div class="collapsible-body">
+				<div class="row">
+				<div class="col s12">
+					<table class="responsive-table">
+						<thead>
+						<tr>
+							<th>Curso</th>
+							<th>Disciplina</th>
+							<th>Professor</th>
+							<th>Data Retirada</th>
+							<th>Data Devolução</th>
+							<th>Externo</th>
+						</tr>
+						</thead>
+
+						<tbody>
+						<tr>
+							<th>{{loan.discipline.course}}</th>
+							<th>{{loan.discipline.name}}</th>
+							<th>{{loan.professor.email}}</th>
+							<th>{{loan.removal_planned_date | date: 'dd/MM/yyyy'}}</th>
+							<th>{{loan.delivery_planned_date | date: 'dd/MM/yyyy'}}</th>
+							<th>{{loan.external? 'Sim' : 'Não'}}</th>
+						</tr>
+						</tbody>
+					</table>
+                </div>
+				<div class="col s4">
+					<table class="responsive-table">
+						<thead>
+						<tr>
+							<th>Participante</th>
+						</tr>
+						</thead>
+
+						<tbody>
+						<li >
+						<tr *ngFor="let student of loan.students">
+							<th >{{student.email}}</th>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col s8">
+					<table class="responsive-table">
+						<thead>
+						<tr>
+							<th>Item</th>
+							<th>Categoria</th>
+							<th>Patrimônio</th>
+						</tr>
+						</thead>
+
+						<tbody>
+						<tr *ngFor="let item of loan.items">
+							<th>{{item.spec}}</th>
+							<th>{{item.kind}}</th>
+							<th>{{item.patrimony}}</th>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col s12">
+					<div class="input-field col s12">
+						<a class="right waves-effect waves-light red btn modal-trigger"
+							data-target="modalCancel">Cancelar</a>
+					</div>
+					<div id="modalCancel" class="modal" materialize="modal"
+						[materializeParams]="[{dismissible: True}]" >
+						<div class="modal-content">
+							<h4>Cancelamento</h4>
+							<p>Deseja realmente cancelar o agendamento?</p>
+							</div>
+							<div class="modal-footer">
+							<a  class="modal-action modal-close
+								waves-effect waves-green btn-flat">Não</a>
+							<a  class="modal-action modal-close
+								waves-effect waves-green btn grey"
+								(click)="cancelLoan(loan.id)">Sim</a>
+							</div>
+					</div>
+				</div>
+                </div>
+                </div>
+            </li>
+        </ul>
+	</div>
+</div>

@@ -1,0 +1,76 @@
+{
+    "Equipamentos":
+        {
+            "Estação Total":[
+                "Topcon GTS 105N",
+                "Topcon GPT 3107w",
+                "Cygnus Tools 2LS",
+                "Topcon GTS 239w A",
+                "Topcon GPT 7005i",
+                "Topcon GPT 7005i"
+            ],
+            "Teodolito":[
+                "010 A",
+                "010 B",
+                "080 A",
+                "T1",
+                "T1 A",
+                "T2",
+                "TS2 Topcon"
+            ],
+            "Nível":[
+                "NI 007",
+                "NI 002",
+                "NI 025",
+                "Wild N05",
+                "Leica DNA 03",
+                "NI 3",
+                "NI 050",
+                "NI 030",
+                "Topcon RL-H3C"
+            ],
+            "GPS de Navegação":[
+                "12 XL",
+                "76",
+                "78"
+            ],
+            "GPS Geodésico":[
+                "Hiper GGD",
+                "Hiper SR",
+                "Hiper lite+"
+            ],
+            "GPS Topográfico":[
+                "4600 LS",
+                "Pro-XH",
+                "Epoch 10"
+            ]
+        },
+        "Acessórios":[
+            "Alvo",
+            "Baliza",
+            "Base nivelante",
+            "Bastão",
+            "Bipé",
+            "Caixa de transporte",
+            "Colete sinalizador",
+            "Cone de sinalização",
+            "Garrafa térmica",
+            "Guarda-sol",
+            "Marreta",
+            "Mira horizontal",
+            "Mira vertical",
+            "Pino FCT",
+            "Pino EP 01",
+            "Pino EP 02",
+            "Pino EP 03",
+            "Piquete",
+            "Prancheta",
+            "Prisma",
+            "Rádio",
+            "Sapata",
+            "Trena 3m",
+            "Trena 30m",
+            "Tripé",
+            "Tripé para bastão"
+        ]
+}

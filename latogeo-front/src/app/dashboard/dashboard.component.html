@@ -1,4 +1,17 @@
-<div class="container">
-    <app-current-loans></app-current-loans>
-    <app-loan></app-loan>
+<div class="row container">
+      <div class="col s12">
+        <ul class="tabs" materialize="tabs">
+          <li class="tab col s4"><a class="active" href="#test1">Novo Empréstimo</a></li>
+          <li class="tab col s4"><a href="#test2">Empréstimos Corrente</a></li>
+          <li class="tab col s4"><a href="#test3">Histórico de Empréstimos</a></li>
+        </ul>
+      </div>
+      <div id="test1" class="col s12">
+		<app-loan></app-loan>
+		</div>
+      <div id="test2" class="col s12">
+		<app-current-loans></app-current-loans>
+	</div>
+      <div id="test3" class="col s12">Test 4</div>
+    </div><div class="container">
 </div>

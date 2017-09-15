@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load myfilters %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static "home/assets/styles/account.css"%}"></link>
+
+<div class="container">
+	<div id="page-content-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<div class="panel-login">
+						<div class="panel-heading">
+							<div class="row">
+
+								<div class="text-uppercase">
+									<a href="#" class="active" id="login-form-link">{% trans "Set new password" %}</a>
+								</div>
+
+							</div>
+							<hr>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+
+                  {% if invalid %}
+                    {% url "password_reset_recover" as recovery_url %}
+                    <p>
+                      <h4>
+                        <div class="instruction">
+                          {% blocktrans %}Sorry, this password reset link is invalid. You can still <a href="{{ recovery_url }}">request a new one</a>.{% endblocktrans %}
+                        </div>
+                      </h4>
+                    </p>
+                  {% else %}
+                    <p>
+                      <h4>
+                        <div class="instruction">
+                          {% blocktrans %}Hi, <strong>{{ username }}</strong>. Please choose your new password.{% endblocktrans %}
+                        </div>
+                      </h4>
+                    </p>
+                    <form method="post" action="{% url "account:my_reset" token %}">
+
+                      {% csrf_token %}
+                      {{ form.non_field_errors }}
+                      <div class="fieldWrapper text-area form-group">
+                        {{ form.password1.errors }}
+                        <label for="id_password1">{% trans form.password1.label%}</label>
+                        {{ form.password1|addclass:'form-control' }}
+                      </div>
+                      <div class="fieldWrapper text-area form-group">
+                        {{ form.password2.errors }}
+                        <label for="id_password2">{% trans form.password2.label%}</label>
+                        {{ form.password2|addclass:'form-control' }}
+                      </div>
+
+                      <p style="text-align:center;">
+                        <input class="btn default-button" type="submit" value="{% trans "Set new password" %}">
+                      </p>
+
+                    </form>
+                  {% endif %}
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static from staticfiles %}
+{% load i18n %}
+{% load myfilters %}
+{% block title %}
+{% trans "Password recovery" %}
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static "home/assets/styles/account.css"%}"></link>
+
+<div class="container">
+	<div id="page-content-wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<div class="panel-login">
+						<div class="panel-heading">
+							<div class="row">
+
+								<div class="text-uppercase">
+									<a href="#" class="active" id="login-form-link">{% trans "Password recovery" %}</a>
+								</div>
+
+							</div>
+							<hr>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+
+									<form id="login-form" method="post" action="{{ url }}" role="form" style="display: block;">
+										{% csrf_token %}
+										{{ form.non_field_errors }}
+										<div class="fieldWrapper text-area form-group">
+											{{ form.username_or_email.errors }}
+											<label for="id_username_or_email">Insira seu e-mail aqui</label>
+											{{ form.username_or_email|addclass:'form-control' }}
+										</div>
+										<p style="text-align:center;">
+											<input type="submit" class="btn default-button" value="{% trans "Recover my password" %}">
+										</p>
+									</form>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

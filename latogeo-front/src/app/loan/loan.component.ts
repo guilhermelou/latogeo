@@ -51,8 +51,7 @@ export class LoanComponent implements OnInit {
   }
 
   getProfessors(): void {
-      this.userService.getProfessors().then(users => {this.professors=users;     console.log(this.professors);
-      });
+      this.userService.getProfessors().then(users => this.professors=users);
   }
 
   searchStudents(term: string): void {

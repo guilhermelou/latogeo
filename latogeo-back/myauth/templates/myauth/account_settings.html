@@ -1,0 +1,247 @@
+{% extends 'index/secondary_base.html' %}
+{% load staticfiles %}
+{% load static from staticfiles %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static "home/assets/styles/toastr.min.css"%}"></link>
+<link rel="stylesheet" href="{% static "home/assets/styles/account_settings.css"%}"></link>
+
+<div class="container default-search-box">
+
+  <!-- SIDE BAR MENU -->
+  <div class="col-md-3" id="leftCol">
+    <div class="" data-offset-bottom="180" data-spy="affix">
+      <ul class="nav nav-stacked" id="sidebar">
+        <li class="active">
+          <a id="sec01-button" href="#sec01">1. Dados do Usuário</a>
+        </li>
+        <li>
+          <a id="sec02-button" href="#sec02">2. Plano de Serviço</a>
+        </li>
+        <li>
+          <a id="sec03-button" href="#sec03">3. Endereço do Estabelecimento</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="col-md-9 default-text">
+
+    <!-- SEC 01 -->
+    <div class="">
+      <h2 id="sec01" class="text-uppercase">1. Dados do Usuário</h2>
+      <hr>
+      <h2>Alterar Nome</h2>
+      <form action="." method="POST" style="overflow: auto; margin-bottom: 50px;">
+        {{ user_change_form.non_field_errors }}
+        {% csrf_token %}
+        <div class="form-group text-area">
+          <label>Primeiro nome:</label>
+          <br>
+          {{ user_change_form.first_name.errors }}
+          <input class="form-control" id="id_first_name" maxlength="30" name="first_name" type="text" value="{{user_change_form.first_name.value}}" placeholder="{{user_change_form.first_name.label}}"/>
+        </div>
+        <div class="form-group text-area">
+          <label>Último nome:</label>
+          <br>
+          {{ user_change_form.last_name.errors }}
+          <input class="form-control" id="id_last_name" maxlength="30" name="last_name" type="text" value="Santos"value="{{user_change_form.last_name.value}}" placeholder="{{user_change_form.last_name.label}}"/>
+        </div>
+        <input type="hidden" name="user_change"  value="True">
+        <button type="submit" class="btn btn-success pull-right default-button">Enviar</button>
+      </form>
+      <h2>Alterar Senha</h2>
+      <form action="." method="POST" style="overflow: auto; margin-bottom: 50px;">
+        {{ password_form.non_field_errors }}
+        {% csrf_token %}
+        <div class="form-group text-area">
+          <label>Senha:</label>
+          {{ password_form.password1.errors }}
+          <input type="password" name="password1" id="id_password1" tabindex="2" class="form-control" placeholder="{{password_form.password1.label}} (a senha deve conter 8 ou mais caracteres, números e letras)" value="">
+        </div>
+        <div class="form-group text-area">
+          <label>Confirmação de Senha:</label>
+          {{ password_form.password2.errors }}
+          <input type="password" name="password2" id="id_password2" tabindex="3" class="form-control" placeholder="{{password_form.password2.label}} (a senha deve conter 8 ou mais caracteres, números e letras)" value="">
+        </div>
+        <input type="hidden" name="password"  value="True">
+        <button type="submit" id="data-password-button" class="btn btn-success pull-right default-button">Enviar</button>
+      </form>
+    </div>
+
+    <!-- SEC 02 -->
+    <div class="">
+      <h2 id="sec02" class="text-uppercase">2. Plano de Serviço</h2>
+      <hr>
+      <div class="row text-center text-uppercase">
+        <div class="ad col-md-8 col-md-offset-2">
+          <div class="thumbnail current-price">
+            <div class="caption">
+
+            {% if request.user.payment_status == request.user.FREE_TRY %}
+              <h3>PREMIUM</h3>
+              <div class="">
+                <span class="price-text">R$</span>
+                <span class="price-text" style="font-weight: 400; font-size: 35px;">29,90</span>
+                <span class="price-text">/mês</span>
+              </div>
+              <hr>
+              <ul>
+                <li>Rotas ilimitadas</li>
+                <li>Exportação para Google Maps</li>
+                <li>Suporte ao cliente</li>
+                <li>Um login por usuário</li>
+                <li>Primeiros 7 dias grátis</li>
+                <li>Pré-pago sem fidelidade</li>
+              </ul>
+              <div class="form-group">
+                <a href="#" class="btn default-button" role="button">ASSINAR</a>
+              </div>
+            {% elif request.user.payment_status == request.user.CURRENT_PAYER %}
+              <h3>PREMIUM</h3>
+              <div class="">
+                <span class="price-text">R$</span>
+                <span class="price-text" style="font-weight: 400; font-size: 35px;">29,90</span>
+                <span class="price-text">/mês</span>
+              </div>
+              <hr>
+              <ul>
+                <li>Rotas ilimitadas</li>
+                <li>Exportação para Google Maps</li>
+                <li>Suporte ao cliente</li>
+                <li>Um login por usuário</li>
+                <li>Primeiros 7 dias grátis</li>
+                <li>Pré-pago sem fidelidade</li>
+              </ul>
+              <div>
+                <a href="#" class="btn default-button" role="button">CANCELAR</a>
+              </div>
+            {% elif request.user.payment_status == request.user.LATE_PAYER %}
+              <h3>PREMIUM</h3>
+              <div class="">
+                <span class="price-text">R$</span>
+                <span class="price-text" style="font-weight: 400; font-size: 35px;">29,90</span>
+                <span class="price-text">/mês</span>
+              </div>
+              <hr>
+              <ul>
+                <li>Rotas ilimitadas</li>
+                <li>Exportação para Google Maps</li>
+                <li>Suporte ao cliente</li>
+                <li>Um login por usuário</li>
+                <li>Primeiros 7 dias grátis</li>
+                <li>Pré-pago sem fidelidade</li>
+              </ul>
+              <div>
+                <a href="#" class="btn default-button" role="button">RENOVAR</a>
+              </div>
+              <div>
+                <a href="#" class="btn default-button" role="button">CANCELAR</a>
+              </div>
+            {% elif request.user.payment_status == request.user.AWATING_APPROVAL %}
+              <h3>PREMIUM</h3>
+              <div class="">
+                <span class="price-text">R$</span>
+                <span class="price-text" style="font-weight: 400; font-size: 35px;">29,90</span>
+                <span class="price-text">/mês</span>
+              </div>
+              <hr>
+              <ul>
+                <li>Rotas ilimitadas</li>
+                <li>Exportação para Google Maps</li>
+                <li>Suporte ao cliente</li>
+                <li>Um login por usuário</li>
+                <li>Primeiros 7 dias grátis</li>
+                <li>Pré-pago sem fidelidade</li>
+              </ul>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEC 03 -->
+    <div>
+      <h2 id="sec03" class="text-uppercase">3. Endereço do Estabelecimento</h2>
+      <hr>
+      <div class="" style="height:500px">
+        <div class="" id="map">
+        </div>
+        <input style="width: 90%" id="pac-input" type="text" class="controls" placeholder="Busque endereço por..." value="{{ user.address }}">
+        <div class="search-box" style="display:none">
+          <form data-toggle="validator" role="form">
+            <div class="input-group user-name">
+              <span class="input-group-btn">
+                <button id="add-client-button" class="btn btn-default" type="submit">
+                  <span class="glyphicon glyphicon-plus"></span>
+                  <span class="glyphicon glyphicon-user"></span>
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="" style="margin-top: 20px">
+        <button id="location-post" type="button" class="btn default-button" name="button">
+          <h3>ALTERAR</h3>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="{% static "home/assets/scripts/bootstrap/jquery.min.js"%}"></script>
+<script src="{% static "home/assets/scripts/bootstrap/bootstrap.min.js"%}"></script>
+<script src="{% static "home/assets/scripts/toastr.min.js"%}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0bbTLY0HIBTBQcPRDac4oDuQxQjDUbwA&libraries=places&callback=initMap"
+   async defer></script>
+<script src="{% static "home/assets/scripts/account_settings.js"%}"></script>
+<script src="{% static "home/assets/scripts/account_main_map.js"%}"></script>
+
+<script type="text/javascript">
+  setCurrentLocation("{% url 'account:account_settings' %}", "{{ user.address }}", "{{ user.lat }}", "{{ user.long }}");
+</script>
+
+<script type="text/javascript">
+  window.onload = function()
+  {
+    $("#location-post").click(function()
+    {
+      var latlngStr = currentLatLng.trim().split(",",2);
+      var lat = parseFloat(latlngStr[0]);
+      var lng = parseFloat(latlngStr[1]);
+
+      $.ajaxSetup({ data: {csrfmiddlewaretoken: '{{ csrf_token }}' }, });
+      $.ajax({
+        url: '{% url 'account:account_settings' %}',
+        type : "POST",
+        data: { "address_change": 1, "address": currentAddress, "lat": lat, "long": lng },
+
+        success : function(response_data)
+        {
+          console.log(response_data);
+
+          if( response_data == 1 )
+          {
+            toastr["success"]("Endereço modificado com sucesso!");
+          }
+          else
+          {
+            toastr["error"]("Falha ao modificar endereço!");
+          }
+        },
+        error : function(xhr, errmsg, err)
+        {
+          toastr["warning"]("Perda de conexão!");
+          console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+      });
+    });
+  };
+</script>
+
+{% endblock %}
