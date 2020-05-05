@@ -1,5 +1,5 @@
 django==1.10.6
 django-password-reset==1.0
-djangorestframework==3.6.3
+djangorestframework==3.9.1
 Markdown==2.6.8
 django-filter==1.0.4
